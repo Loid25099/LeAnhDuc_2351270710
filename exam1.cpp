@@ -1,4 +1,4 @@
-//Thuat toan tim kiem duong DSF
+//Thuat toan tim kiem bang DSF
 #include <iostream>
 #include <vector>
 #include <stack>
