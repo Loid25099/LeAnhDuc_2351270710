@@ -1,45 +1,30 @@
-//Thuat toan tim kiem bang DSF
 #include <iostream>
 #include <vector>
-#include <stack>
-
+#include <set>
 using namespace std;
-
-class Graph {
-public:
-    int V;
-    vector<vector<int>> adj;
-
-    Graph(int V) {
-        this->V = V;
-        adj.resize(V);
-    }
-
-    void addEdge(int v, int w) {
-        adj[v].push_back(w);
-    }
-
-    void DFS(int start) {
-        vector<bool> visited(V, false);
-        stack<int> s;
-
-        s.push(start);
-
-        while (!s.empty()) {
-            int v = s.top();
-            s.pop();
-
-            if (!visited[v]) {
-                cout << v << " ";
-                visited[v] = true;
-            }
-
-            for (int i = adj[v].size() - 1; i >= 0; i--) {
-                if (!visited[adj[v][i]]) {
-                    s.push(adj[v][i]);
-                }
-            }
+void dfs(int node, const vector<vector<int>>& graph, set<int>& visited) {
+    visited.insert(node);
+    cout << node << " ";
+    for (int neighbor : graph[node]) {
+        if (visited.find(neighbor) == visited.end()) {
+            dfs(neighbor, graph, visited);
         }
     }
-};
+}
+int main() {
+    vector<vector<int>> graph = {
+        {1, 2},   
+        {0, 3},   
+        {0},       
+        {1}       
+    };
+
+    set<int> visited;
+
+    cout << "DFS b?t d?u t? d?nh 0: ";
+    dfs(0, graph, visited);
+
+    return 0;
+}
+
 
